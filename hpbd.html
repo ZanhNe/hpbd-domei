@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Đỗ My 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffecd2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-radius: 50px;
+            box-shadow: 0 8px 30px rgba(255, 105, 180, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.6);
+        }
+
+        .music-control span {
+            font-size: 24px;
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #ff1493, #ff69b4, #ffc0cb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+            margin-bottom: 10px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5));
+            }
+
+            to {
+                filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.8));
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #ff1493;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        .date {
+            font-size: 1.3em;
+            color: #ff69b4;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* Love Message */
+        .love-message {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .love-message p {
+            font-size: 1.3em;
+            color: #ff1493;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* 3D Scene Container */
+        .scene-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            margin: 0 auto 40px;
+            perspective: 1500px;
+        }
+
+        .instruction {
+            text-align: center;
+            color: #ff1493;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        #canvas3d {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+        }
+
+        /* Controls */
+        .controls {
+            text-align: center;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 105, 180, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            font-size: 1.8em;
+            color: #ff1493;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .scene-container {
+                height: 400px;
+            }
+
+            .music-control {
+                top: 10px;
+                right: 10px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Music Control -->
+    <div class="music-control" id="musicControl">
+        <span id="musicIcon">🎵</span>
+    </div>
+
+    <!-- Hidden Audio -->
+    <audio id="bgMusic" loop preload="auto">
+        <source
+            src="https://res.cloudinary.com/djscuxequ/video/upload/v1760711470/piano-love-song-six-398564_p7rgtn.mp3"
+            type="audio/mpeg">
+    </audio>
+
+    <!-- Welcome Modal -->
+    <div id="welcomeModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+        <div
+            style="background: linear-gradient(135deg, #ff69b4, #ffc0cb); padding: 50px; border-radius: 30px; text-align: center; box-shadow: 0 20px 60px rgba(255, 105, 180, 0.6); max-width: 500px;">
+            <h2 style="color: white; font-size: 2.5em; margin-bottom: 20px;">💖 Chào Đỗ My 💖</h2>
+            <p style="color: white; font-size: 1.3em; margin-bottom: 30px;">Bấm vào để mở quà sinh nhật nha! 🎁</p>
+            <button onclick="startExperience()"
+                style="background: white; color: #ff1493; border: none; padding: 20px 50px; border-radius: 50px; font-size: 1.5em; font-weight: bold; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: all 0.3s ease;">
+                🎉 Mở Quà 🎉
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>💖 Chúc Mừng Sinh Nhật Đỗ My 💖</h1>
+            <p class="subtitle">Người con gái xinh đẹp nhất</p>
+            <p class="date">18/10/2025 🎂</p>
+        </header>
+
+        <!-- Love Message -->
+        <div class="love-message">
+            <p>🌸 Chúc em sinh nhật thật nhiều niềm vui và hạnh phúc! 🌸</p>
+            <p>💕 Em là món quà tuyệt vời nhất 💕</p>
+            <p>🎁 Anh yêu em nhiều lắm! 🎁</p>
+        </div>
+
+        <!-- Instructions -->
+        <p class="instruction">✨ Kéo chuột để xoay • Scroll để zoom • ✨</p>
+
+        <!-- 3D Scene -->
+        <div class="scene-container">
+            <canvas id="canvas3d"></canvas>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn" onclick="autoRotate()">🔄 Tự động xoay</button>
+            <button class="btn" onclick="changeSpeed()">⚡ Đổi tốc độ</button>
+            <button class="btn" onclick="resetView()">🎯 Đặt lại góc nhìn</button>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>💗 Yêu em</p>
+        </footer>
+    </div>
+
+    <script>
+        // Welcome Modal & Music - Phải khai báo trước khi load HTML
+        const music = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const welcomeModal = document.getElementById('welcomeModal');
+        let isPlaying = false;
+
+        // Show welcome modal on load
+        window.addEventListener('load', () => {
+            welcomeModal.style.display = 'flex';
+        });
+
+        // Start experience - Play music (GLOBAL FUNCTION)
+        function startExperience() {
+            welcomeModal.style.display = 'none';
+            music.play().then(() => {
+                isPlaying = true;
+                musicIcon.textContent = '🎶';
+            }).catch(err => {
+                console.log('Autoplay prevented:', err);
+                alert('Không thể phát nhạc. Vui lòng bấm vào nút nhạc góc trên phải!');
+            });
+        }
+
+        // Toggle music control (GLOBAL FUNCTION)
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.textContent = '🎵';
+                isPlaying = false;
+            } else {
+                music.play().then(() => {
+                    musicIcon.textContent = '🎶';
+                    isPlaying = true;
+                }).catch(err => {
+                    alert('Không thể phát nhạc. Vui lòng kiểm tra kết nối internet!');
+                });
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Add event listener for music control
+        document.getElementById('musicControl').addEventListener('click', toggleMusic);
+
+        // Three.js Setup
+        const canvas = document.getElementById('canvas3d');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+        renderer.setClearColor(0x000000, 0);
+
+        camera.position.z = 8;
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const pointLight1 = new THREE.PointLight(0xff69b4, 1, 100);
+        pointLight1.position.set(10, 10, 10);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0xffc0cb, 1, 100);
+        pointLight2.position.set(-10, -10, 10);
+        scene.add(pointLight2);
+
+        // Photo URLs (Thay đổi URLs này bằng link ảnh thật của bạn)
+        const photoUrls = [
+            'https://res.cloudinary.com/djscuxequ/image/upload/a_exif/f_auto,q_auto/v1760711460/domy_2_r8hyti.jpg',
+            'https://res.cloudinary.com/djscuxequ/image/upload/a_exif/f_auto,q_auto/v1760711458/domy_3_sjlu8b.jpg',
+            'https://res.cloudinary.com/djscuxequ/image/upload/a_exif/f_auto,q_auto/v1760711458/domy_1_ovgvlq.jpg',
+            'https://res.cloudinary.com/djscuxequ/image/upload/a_exif/f_auto,q_auto/v1760711457/domy_4_ywywkq.jpg',
+            'https://res.cloudinary.com/djscuxequ/image/upload/a_exif/f_auto,q_auto/v1760711921/domy_5_kz5do1.jpg',
+            'https://res.cloudinary.com/djscuxequ/image/upload/a_exif/f_auto,q_auto/v1760711919/domy_6_lgutie.jpg',
+            ''
+        ];
+
+        // Create photo spheres
+        const photoGroup = new THREE.Group();
+        const radius = 5;
+        const photoMeshes = [];
+
+        photoUrls.forEach((url, i) => {
+            const textureLoader = new THREE.TextureLoader();
+            const texture = textureLoader.load(url, (t) => {
+                t.center.set(0.5, 0.5);   // đặt tâm làm trục xoay
+                t.rotation = Math.PI;     // xoay 180 độ
+            });
+
+
+            const geometry = new THREE.PlaneGeometry(2, 2);
+            const material = new THREE.MeshStandardMaterial({
+                map: texture,
+                side: THREE.DoubleSide,
+                metalness: 0.2,
+                roughness: 0.8
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+
+            // Position photos in a circle
+            const angle = (i / photoUrls.length) * Math.PI * 2;
+            mesh.position.x = Math.cos(angle) * radius;
+            mesh.position.z = Math.sin(angle) * radius;
+            mesh.position.y = (Math.random() - 0.5) * 2;
+
+            // Rotate to face center
+            mesh.lookAt(0, mesh.position.y, 0);
+
+            photoGroup.add(mesh);
+            photoMeshes.push(mesh);
+        });
+
+        scene.add(photoGroup);
+
+        // Hearts particles
+        const heartsGroup = new THREE.Group();
+        const heartGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+        const heartMaterial = new THREE.MeshBasicMaterial({ color: 0xff69b4 });
+
+        for (let i = 0; i < 30; i++) {
+            const heart = new THREE.Mesh(heartGeometry, heartMaterial);
+            heart.position.set(
+                (Math.random() - 0.5) * 15,
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 15
+            );
+            heartsGroup.add(heart);
+        }
+        scene.add(heartsGroup);
+
+        // Mouse interaction
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let rotationVelocity = { x: 0, y: 0 };
+        let autoRotateEnabled = true;
+        let rotationSpeed = 0.005;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            autoRotateEnabled = false;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const deltaMove = {
+                    x: e.offsetX - previousMousePosition.x,
+                    y: e.offsetY - previousMousePosition.y
+                };
+
+                rotationVelocity.x = deltaMove.y * 0.01;
+                rotationVelocity.y = deltaMove.x * 0.01;
+            }
+
+            previousMousePosition = {
+                x: e.offsetX,
+                y: e.offsetY
+            };
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            camera.position.z += e.deltaY * 0.01;
+            camera.position.z = Math.max(5, Math.min(15, camera.position.z));
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        canvas.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            autoRotateEnabled = false;
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const deltaX = e.touches[0].clientX - touchStartX;
+            const deltaY = e.touches[0].clientY - touchStartY;
+
+            rotationVelocity.x = deltaY * 0.01;
+            rotationVelocity.y = deltaX * 0.01;
+
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        });
+
+        // Control functions
+        function autoRotate() {
+            autoRotateEnabled = !autoRotateEnabled;
+        }
+
+        function changeSpeed() {
+            rotationSpeed = rotationSpeed === 0.005 ? 0.015 : 0.005;
+        }
+
+        function resetView() {
+            camera.position.set(0, 0, 8);
+            photoGroup.rotation.set(0, 0, 0);
+            rotationVelocity = { x: 0, y: 0 };
+            autoRotateEnabled = true;
+        }
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (autoRotateEnabled) {
+                photoGroup.rotation.y += rotationSpeed;
+            } else {
+                photoGroup.rotation.x += rotationVelocity.x;
+                photoGroup.rotation.y += rotationVelocity.y;
+
+                rotationVelocity.x *= 0.95;
+                rotationVelocity.y *= 0.95;
+            }
+
+            // Animate individual photos
+            photoMeshes.forEach((mesh, i) => {
+                mesh.rotation.z = Math.sin(Date.now() * 0.001 + i) * 0.1;
+                mesh.position.y += Math.sin(Date.now() * 0.001 + i) * 0.002;
+            });
+
+            // Animate hearts
+            heartsGroup.rotation.y += 0.002;
+            heartsGroup.children.forEach((heart, i) => {
+                heart.position.y += Math.sin(Date.now() * 0.002 + i) * 0.01;
+            });
+
+            // Animate lights
+            pointLight1.position.x = Math.sin(Date.now() * 0.001) * 10;
+            pointLight2.position.x = Math.cos(Date.now() * 0.001) * 10;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+        });
+
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['#ff69b4', '#ff1493', '#ffc0cb', '#ff91c1'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.zIndex = '999';
+                    confetti.style.animation = 'confetti-fall 3s linear';
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confetti-fall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        setInterval(createConfetti, 5000);
+        createConfetti();
+    </script>
+</body>
+
+</html>
